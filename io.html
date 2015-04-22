@@ -10,7 +10,7 @@
 
 <meta name="author" content="Steph Locke" />
 
-<meta name="date" content="2015-04-08" />
+<meta name="date" content="2015-04-22" />
 
 <title>IO</title>
 
@@ -64,10 +64,18 @@ img {
 <div id="header">
 <h1 class="title">IO</h1>
 <h4 class="author"><em>Steph Locke</em></h4>
-<h4 class="date"><em>2015-04-08</em></h4>
+<h4 class="date"><em>2015-04-22</em></h4>
 </div>
 
 
+<div id="requirements" class="section level2">
+<h2>Requirements</h2>
+<ul>
+<li>suggested package: data.table</li>
+<li>suggested package: readr</li>
+<li>suggested package: readxl</li>
+</ul>
+</div>
 <div id="in" class="section level2">
 <h2>In</h2>
 <table>
@@ -94,14 +102,6 @@ img {
 <td align="left">SPSS / SAS / Stata</td>
 <td align="left">haven::read_[prog]</td>
 </tr>
-<tr class="odd">
-<td align="left">Hadoop</td>
-<td align="left">rHadoopClient::read.hdfs</td>
-</tr>
-<tr class="even">
-<td align="left">NoSQL</td>
-<td align="left">mongodb::mongo.find , RNeo4Jj::getNodes</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -121,26 +121,22 @@ img {
 </tr>
 <tr class="even">
 <td align="left">Excel</td>
-<td align="left">.</td>
+<td align="left">openxlsx::write.xlsx</td>
 </tr>
 <tr class="odd">
 <td align="left">Database</td>
-<td align="left">RODBC::sqlSave , DBI::dbGetQuery</td>
+<td align="left">RODBC::sqlSave , DBI::dbWriteTable</td>
 </tr>
 <tr class="even">
 <td align="left">SPSS / SAS / Stata</td>
-<td align="left">.</td>
-</tr>
-<tr class="odd">
-<td align="left">Hadoop</td>
-<td align="left">.</td>
-</tr>
-<tr class="even">
-<td align="left">NoSQL</td>
-<td align="left">.</td>
+<td align="left">foreign::write.foreign</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="other-file-types" class="section level2">
+<h2>Other file types</h2>
+<p>As well standard formats, there’s a lot of connector packages out there, including a suite for <a href="https://github.com/RevolutionAnalytics/RHadoop/wiki">Hadoop</a>.</p>
 </div>
 
 

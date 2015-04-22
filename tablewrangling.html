@@ -10,7 +10,7 @@
 
 <meta name="author" content="Steph Locke" />
 
-<meta name="date" content="2015-04-08" />
+<meta name="date" content="2015-04-22" />
 
 <title>Wrangling Tables</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Wrangling Tables</h1>
 <h4 class="author"><em>Steph Locke</em></h4>
-<h4 class="date"><em>2015-04-08</em></h4>
+<h4 class="date"><em>2015-04-22</em></h4>
 </div>
 
 
@@ -101,7 +101,7 @@ DT[WHERE | JOIN | ORDER, SELECT | UPDATE, GROUP]</code></pre>
 <li>A primary key can have repeat values</li>
 <li>No constrained foreign keys</li>
 <li>Joins are done by <em>position in key</em> so tblA with key A, and tblB with key C,A would join on tblA[A] and tblB[C]</li>
-<li>It’s inherently dynamic so vectors of column names etc. can be provided</li>
+<li>It’s inherently dynamic so vectors of column names etc. can be provided to it</li>
 <li>DELETE doesn’t exist explicitly</li>
 <li>It’s case-sensitive</li>
 </ul>
@@ -122,7 +122,7 @@ DT[WHERE | JOIN | ORDER, SELECT | UPDATE, GROUP]</code></pre>
 <tbody>
 <tr class="odd">
 <td align="left">CREATE</td>
-<td align="left">data.table(…)</td>
+<td align="left">data.table(…) setDT()</td>
 <td align="left"><code>data.table(a=1:3 , b=LETTERS[1:3])</code> <code>data.table(iris)</code></td>
 </tr>
 <tr class="even">
@@ -156,66 +156,61 @@ DT[WHERE | JOIN | ORDER, SELECT | UPDATE, GROUP]</code></pre>
 <td align="left"><code>irisDT[ , .(Count=.N, Length=mean(Sepal.Length))]</code></td>
 </tr>
 <tr class="even">
-<td align="left">SELECT dynamically i.e. by reference</td>
-<td align="left">DT[ , colnames , with=FALSE]</td>
-<td align="left"><code>cols&lt;-colnames(irisDT); irisDT[ , cols, with=FALSE]</code></td>
-</tr>
-<tr class="odd">
 <td align="left">WHERE exact on primary key</td>
 <td align="left">DT[value] DT[value, ]</td>
 <td align="left"><code>irisDT[&quot;setosa&quot;]</code> <code>irisDT[&quot;setosa&quot;, .(Count=.N)]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">WHERE</td>
 <td align="left">DT[condition] DT[condition, j, by]</td>
 <td align="left"><code>irisDT[Species==&quot;setosa&quot;]</code> <code>irisDT[Species==&quot;setosa&quot;, .(Count=.N)]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">WHERE BETWEEN</td>
 <td align="left">DT[between(col, min, max)] DT[ col %between% c(min,max) ]</td>
 <td align="left"><code>irisDT[between(Sepal.Length, 1, 5)]</code> <code>irisDT[Sepal.Length %between% c(1,5)]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">WHERE LIKE</td>
 <td align="left">DT[like(col,pattern)] DT[ col %like% pattern ]</td>
 <td align="left"><code>irisDT[like(Species,&quot;set&quot;)]</code> <code>irisDT[Species %like% &quot;set&quot;]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">ORDER asc.</td>
 <td align="left">DT[order(cols)] DT[order(cols), j, by]</td>
 <td align="left"><code>irisDT[order(Species)]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">ORDER desc.</td>
 <td align="left">DT[order(-cols)] DT[order(-cols), j, by]</td>
 <td align="left"><code>irisDT[order(-Species)]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">ORDER multiple</td>
 <td align="left">DT[order(cols)] DT[order(cols), j, by]</td>
 <td align="left"><code>irisDT[order(-Species, Petal.Width)]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">GROUP BY single</td>
 <td align="left">DT[i, j, by]</td>
 <td align="left"><code>irisDT[ ,.N, by=Species]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">GROUP BY multiple</td>
 <td align="left">DT[i, j, by]</td>
 <td align="left"><code>irisDT[ ,.N, by=.(Species,Width=Petal.Width)]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">TOP</td>
 <td align="left">head(DT, n)</td>
 <td align="left"><code>head(irisDT)</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">HAVING</td>
 <td align="left">DT[i, j, by][condition]</td>
 <td align="left"><code>irisDT[ , .(Count=.N), by=Species][Count&gt;25]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Sub-queries</td>
 <td align="left">DT[…][…][…]</td>
 <td align="left"><code>irisDT[ , .(Sepal.Length=mean(Sepal.Length)), by=Species][Sepal.Length&gt;6, .(Species)]</code></td>
@@ -265,6 +260,16 @@ DT[WHERE | JOIN | ORDER, SELECT | UPDATE, GROUP]</code></pre>
 <td align="left">DT &lt;- DT[!condition]</td>
 <td align="left"><code>irisDT &lt;- irisDT[!(Species==&quot;setosa&quot; &amp; Petal.Length&gt;=1.5)]</code></td>
 </tr>
+<tr class="odd">
+<td align="left">DROP table</td>
+<td align="left">DT &lt;- NULL</td>
+<td align="left"><code>irisDT&lt;-NULL</code></td>
+</tr>
+<tr class="even">
+<td align="left">DROP column</td>
+<td align="left">DT[,col:=NULL]</td>
+<td align="left"><code>iristDT[,Species:=NULL]</code></td>
+</tr>
 </tbody>
 </table>
 <p>* Uses <code>irisDT &lt;- data.table(iris)</code></p>
@@ -300,6 +305,11 @@ DT[WHERE | JOIN | ORDER, SELECT | UPDATE, GROUP]</code></pre>
 <td align="left">key(DT)</td>
 <td align="left"><code>key(irisDT)</code></td>
 </tr>
+<tr class="odd">
+<td align="left">List all data.tables</td>
+<td align="left">tables()</td>
+<td align="left"><code>tables()</code></td>
+</tr>
 </tbody>
 </table>
 <p>* Uses <code>irisDT &lt;- data.table(iris)</code></p>
@@ -317,7 +327,7 @@ DT[WHERE | JOIN | ORDER, SELECT | UPDATE, GROUP]</code></pre>
 <tbody>
 <tr class="odd">
 <td align="left">INNER JOIN</td>
-<td align="left">Y[X, nomatch=0L]</td>
+<td align="left">Y[X, nomatch=0]</td>
 <td align="left"><code>lookupDT[irisDT,nomatch=0]</code></td>
 </tr>
 <tr class="even">
@@ -368,74 +378,104 @@ lookupDT &lt;- data.table(Species=c(&quot;setosa&quot;, &quot;virginica&quot;, &
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left">SELECT dynamically</td>
+<td align="left">DT[ , colnames , with=FALSE] , DT[ , .SD , .SDcols=colnames</td>
+<td align="left"><code>cols&lt;-colnames(irisDT); irisDT[ , cols, with=FALSE]</code> <code>cols&lt;-colnames(irisDT); irisDT[ , .SD, .SDcols=colnames]</code></td>
+</tr>
+<tr class="even">
+<td align="left">GROUP BY dynamically</td>
+<td align="left">DT[ , …, by=colnames]</td>
+<td align="left"><code>irisDT[,.N,by=c(&quot;Species&quot;)]</code></td>
+</tr>
+<tr class="odd">
+<td align="left">GROUP BY, ORDER BY group</td>
+<td align="left">DT[ , … , keyby]</td>
+<td align="left"><code>irisDT[,.N,keyby=Species]</code></td>
+</tr>
+<tr class="even">
 <td align="left">UPDATE / ADD column of summary stat</td>
 <td align="left">DT[ , a := b ]</td>
 <td align="left"><code>irisDT[ , All.SL.Mean:=mean(Sepal.Length)]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">UPDATE / ADD column by group</td>
 <td align="left">DT[ , a := b, by]</td>
 <td align="left"><code>irisDT[ , Species.SL.Mean:=mean(Sepal.Length), by=Species]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">TOP by group</td>
 <td align="left">DT[ , head(.SD), by]</td>
 <td align="left"><code>irisDT[ , head(.SD,2) , by=Species]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Largest record</td>
 <td align="left">DT[ which.max(col) ]</td>
 <td align="left"><code>irisDT[ which.max(Sepal.Length) ]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Largest record by group</td>
 <td align="left">DT[ , .SD[ which.max(col) ], by]</td>
 <td align="left"><code>irisDT[ , .SD[ which.max(Sepal.Length) ], by=Species]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Cumulative total</td>
 <td align="left">DT[ , cumsum(col) ]</td>
 <td align="left"><code>irisDT[ , cumsum(Sepal.Width)]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">NEGATIVE SELECT</td>
 <td align="left">DT[ , .SD, .SDcols=-“colname”]</td>
 <td align="left"><code>irisDT[ , .SD, .SDcols=-&quot;Species&quot;]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">RANK</td>
 <td align="left">DT[ , frank(col) ]</td>
 <td align="left"><code>irisDT[ , frank(Sepal.Length,ties.method=&quot;first&quot;)]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">AGGREGATE multiple columns</td>
 <td align="left">DT[ , lapply(.SD, sum)]</td>
 <td align="left"><code>irisDT[ , lapply(.SD,sum), .SDcols=-&quot;Species&quot;]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">AGGREGATE multiple columns by group</td>
 <td align="left">DT[ , lapply(.SD, sum), by]</td>
 <td align="left"><code>irisDT[ , lapply(.SD,sum), by=Species]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">COUNT DISTINCT multiple columns by group</td>
 <td align="left">DT[ , lapply(.SD, uniqueN), by]</td>
 <td align="left"><code>irisDT[ , lapply(.SD,uniqueN), by=Species]</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">COUNT NULL multiple columns by group</td>
 <td align="left">DT[ , lapply(.SD, function(x) sum(is.na(x))), by]</td>
 <td align="left"><code>irisDT[ , lapply(.SD,function(x) sum(is.na(x))), by=Species]</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">PIVOT data - to single value column</td>
 <td align="left">melt(DT,…)</td>
 <td align="left"><code>melt(irisDT)</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">PIVOT data - to aggregate</td>
 <td align="left">dcast(DT, a~b, function)</td>
 <td align="left"><code>dcast(melt(irisDT), Species ~ variable, sum)</code></td>
+</tr>
+<tr class="even">
+<td align="left">Convert a large data.frame or list</td>
+<td align="left">setDT()</td>
+<td align="left"><code>iris&lt;-iris; setDT(iris)</code></td>
+</tr>
+<tr class="odd">
+<td align="left">ROW_NUMBER</td>
+<td align="left">DT[ , .I]</td>
+<td align="left"><code>irisDT[ , .I]</code></td>
+</tr>
+<tr class="even">
+<td align="left">GROUP number</td>
+<td align="left">DT[, .GRP ,by]</td>
+<td align="left"><code>irisDT[ , .GRP, by=Species]</code></td>
 </tr>
 </tbody>
 </table>
@@ -458,14 +498,42 @@ lookupDT &lt;- data.table(Species=c(&quot;setosa&quot;, &quot;virginica&quot;, &
 <td align="left"><code>irisDT[order(Sepal.Length), .N, by=.(Species, rleid(Species))]</code></td>
 </tr>
 <tr class="even">
-<td align="left">Calculate using (previous/next/n) row</td>
-<td align="left">DT[ , col / shift( cols, n, fill, type)]</td>
+<td align="left">Calculate using (previous/next) N row</td>
+<td align="left">DT[ , shift( cols, n)]</td>
 <td align="left"><code>irisDT[ , prev.Sepal.Length:=shift(Sepal.Length), by=Species ]</code></td>
+</tr>
+<tr class="odd">
+<td align="left">ORDER underlying table</td>
+<td align="left">setorder()</td>
+<td align="left"><code>setorder(irisDT,Species)</code></td>
+</tr>
+<tr class="even">
+<td align="left">JOIN &amp; GROUP by keys</td>
+<td align="left">X[Y, .N, by=.EACHI]</td>
+<td align="left"><code>irisDT[lookupDT, .N, by=.EACHI]</code></td>
+</tr>
+<tr class="odd">
+<td align="left">TRANSPOSE data.table</td>
+<td align="left">transpose(DT)</td>
+<td align="left"><code>transpose(irisDT)</code></td>
+</tr>
+<tr class="even">
+<td align="left">Split string to columns</td>
+<td align="left">DT[, tstrsplit(charCol, pattern) ]</td>
+<td align="left"><code>irisDT[ , tstrsplit(as.character(Species),&quot;e&quot;)]</code></td>
 </tr>
 </tbody>
 </table>
-<p>* Uses <code>irisDT &lt;- data.table(iris)</code></p>
+<p>* Uses:</p>
+<pre><code>irisDT   &lt;- data.table(iris, key=&quot;Species&quot;)
+lookupDT &lt;- data.table(Species=c(&quot;setosa&quot;, &quot;virginica&quot;, &quot;Blah&quot;), Band=c(&quot;A&quot;, &quot;B&quot;, &quot;A&quot;), key=&quot;Species&quot;)</code></pre>
 </div>
+</div>
+<div id="more-resources" class="section level2">
+<h2>More resources</h2>
+<ul>
+<li><a href="https://github.com/Rdatatable/data.table/wiki/Getting-started">data.table wiki</a></li>
+</ul>
 </div>
 
 

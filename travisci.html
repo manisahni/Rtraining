@@ -10,7 +10,7 @@
 
 <meta name="author" content="Steph Locke" />
 
-<meta name="date" content="2015-04-17" />
+<meta name="date" content="2015-04-22" />
 
 <title>Travis-CI</title>
 
@@ -64,14 +64,26 @@ img {
 <div id="header">
 <h1 class="title">Travis-CI</h1>
 <h4 class="author"><em>Steph Locke</em></h4>
-<h4 class="date"><em>2015-04-17</em></h4>
+<h4 class="date"><em>2015-04-22</em></h4>
 </div>
 
 
-<p>Once you have a package and unit tests, then a great way of making sure that as you change things you don’t break them is to perform <a href="http://www.thoughtworks.com/continuous-integration">Continuous Integration</a> whenever you commit a change.</p>
-<p>The easiest, cheapest, and fastest way of setting up CI for your R work is <a href="https://travis-ci.com/">Travis-CI</a> which is free if you use github as a remote server for your code.</p>
-<p>The means to configure it is to set up a Travis-CI account that is linked to your github. Once it’s linked tell Travis which project(s) you’d like to do CI on.</p>
-<p>Additionally, whilst we’re doing this we should be awesome and set up test coverage checks as well. Go to <a href="https://coveralls.io/">coveralls.io</a>, set up an account linked to your github and flip the switch for your project(s).</p>
+<p>With <a href="http://r-pkgs.had.co.nz/">excellent guidance</a> and <a href="http://cran.r-project.org/web/packages/devtools/">tooling</a> on making R packages, it’s becoming really easy to make a package to hold your R functionality. This has a host of benefits, not least source control (via GitHub) and unit testing (via the <a href="http://cran.r-project.org/web/packages/testthat/"><code>testthat</code></a> package). Once you have a package and unit tests, a great way of making sure that as you change things you don’t break them is to perform <a href="http://www.thoughtworks.com/continuous-integration">Continuous integration</a>.</p>
+<p>What this means is that <strong>every</strong> time you make a change, your package is built and thoroughly checked for any issues. If issues are found the “build’s broke” and you have to fix it ASAP.</p>
+<p>The easiest, cheapest, and fastest way of setting up continuous integration for R stuff is to use <a href="https://travis-ci.com/">Travis-CI</a>, which is free if you use <a href="http://github.com">GitHub</a> as a remote server for your code. <em>NB - it doesn’t have to be your only remote server</em></p>
+<div id="account-setup" class="section level2">
+<h2>Account setup</h2>
+<p>The first thing that needs doing is setting up your accounts and turning on CI for your repositories. The website is pretty good so I won’t go into a lot of detail, but the process is:</p>
+<ol style="list-style-type: decimal">
+<li>sign up for a Travis-CI account</li>
+<li>link it to your GitHub account</li>
+<li>say which repositories you want to do CI on</li>
+<li>add config to your repositories</li>
+</ol>
+<p>Additionally, whilst we’re doing this we should be awesome and set up test coverage checks as well. The process is really similar, but for <a href="https://coveralls.io/">coveralls.io</a> and we only need the one set of config details in our package.</p>
+</div>
+<div id="the-config-file" class="section level2">
+<h2>The config file</h2>
 <p>Then you add a really simple file into the root of your project called <code>.travis.yml</code>.</p>
 <p>This should contain, at minimum, the following:</p>
 <pre><code>language: r
@@ -83,8 +95,13 @@ r_github_packages:
 after_success:
   - Rscript -e 'library(covr);coveralls()'</code></pre>
 <p><em>NB - be careful with the indentation, YAML is very sensitive!</em></p>
-<p>Once you’ve flipped the switch on Travis and Coveralls, every time you do a commit Travis will basically build a server with all the requirements needed to run R and build R packages. It’ll then install all your package’s dependencies, check the package for minimum quality standards and also run your testthat tests. Once this is done the final bit tests your code coverage and passes the results to Coverall.</p>
-<p>Great, so you’ve checked the sites and it’s working but you should show the world it’s working! You can get some some snippets of code from each of the sites that you can paste into your README file. These stay uptodate with the latest results so that you (and everyone else) can see the status of your package.</p>
+<p>This is the latest set of values that work as it takes into account the recent support for R, the ability to reference github packages, and also Travis’ move towards docker containers which don’t accept sudo commands.</p>
+<p>Once you’ve flipped the switch on Travis and Coveralls, every push to GitHub will trigger Travis. Travis will basically build a server with all the requirements needed to run R and build R packages. It’ll then install all your package’s dependencies, check the package for minimum quality standards and also run your testthat tests. Once this is done the final bit tests your code coverage and passes the results to Coverall.</p>
+</div>
+<div id="badge-of-honour" class="section level2">
+<h2>Badge of honour</h2>
+<p>Great, so you’ve checked the sites and it’s working but you should show the world it’s working! You can get some some snippets of code from each of the sites that you can paste into your README file. These stay up to date with the latest results so that you (and everyone else) can see the status of your package.</p>
+</div>
 
 
 </div>

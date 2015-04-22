@@ -10,7 +10,7 @@
 
 <meta name="author" content="Steph Locke" />
 
-<meta name="date" content="2015-04-05" />
+<meta name="date" content="2015-04-22" />
 
 <title>Syntax &amp; Structure</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Syntax &amp; Structure</h1>
 <h4 class="author"><em>Steph Locke</em></h4>
-<h4 class="date"><em>2015-04-05</em></h4>
+<h4 class="date"><em>2015-04-22</em></h4>
 </div>
 
 
@@ -82,42 +82,42 @@ img {
 <tr class="odd">
 <td align="left">Subtract</td>
 <td align="left">-</td>
-<td align="left">5 - 4 = 1</td>
+<td align="left"><code>5 - 4</code> = 1</td>
 </tr>
 <tr class="even">
 <td align="left">Add</td>
 <td align="left">+</td>
-<td align="left">5 + 4 = 9</td>
+<td align="left"><code>5 + 4</code> = 9</td>
 </tr>
 <tr class="odd">
 <td align="left">Multiply</td>
 <td align="left">*</td>
-<td align="left">5 * 4 = 20</td>
+<td align="left"><code>5 * 4</code> = 20</td>
 </tr>
 <tr class="even">
 <td align="left">Divide</td>
 <td align="left">/</td>
-<td align="left">5 / 4 = 1.25</td>
+<td align="left"><code>5 / 4</code> = 1.25</td>
 </tr>
 <tr class="odd">
 <td align="left">Raise to the power</td>
 <td align="left">^</td>
-<td align="left">5 ^ 4 = 625</td>
+<td align="left"><code>5 ^ 4</code> = 625</td>
 </tr>
 <tr class="even">
 <td align="left">Modulus</td>
 <td align="left">%%</td>
-<td align="left">10 %% 4 = 2</td>
+<td align="left"><code>10 %% 4</code> = 2</td>
 </tr>
 <tr class="odd">
 <td align="left">Absolute remainder</td>
 <td align="left">%/%</td>
-<td align="left">9 %/% 4 = 2</td>
+<td align="left"><code>9 %/% 4</code> = 2</td>
 </tr>
 <tr class="even">
 <td align="left">Basic sequence</td>
 <td align="left">:</td>
-<td align="left">sum(1:3) = 6</td>
+<td align="left"><code>sum(1:3)</code> = 6</td>
 </tr>
 </tbody>
 </table>
@@ -136,37 +136,37 @@ img {
 <tr class="odd">
 <td align="left">Less than</td>
 <td align="left">&lt;</td>
-<td align="left">5 &lt; 5 = FALSE</td>
+<td align="left"><code>5 &lt; 5</code> = FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Less than or equal to</td>
 <td align="left">&lt;=</td>
-<td align="left">5 &lt;= 5 = TRUE</td>
+<td align="left"><code>5 &lt;= 5</code> = TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Greater than</td>
 <td align="left">&gt;</td>
-<td align="left">5 &gt; 5 = FALSE</td>
+<td align="left"><code>5 &gt; 5</code> = FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Greater than or equal to</td>
 <td align="left">&gt;=</td>
-<td align="left">5 &gt;= 5 = TRUE</td>
+<td align="left"><code>5 &gt;= 5</code> = TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Exactly equal</td>
 <td align="left">==</td>
-<td align="left">(0.5 - 0.3) == (0.3 - 0.1) is FALSE, 2 == 2 is TRUE</td>
+<td align="left"><code>(0.5 - 0.3) == (0.3 - 0.1)</code> is FALSE, 2 == 2 is TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Not equal</td>
 <td align="left">!=</td>
-<td align="left">(0.5 - 0.3) != (0.3 - 0.1) is TRUE, 2 != 2 is FALSE</td>
+<td align="left"><code>(0.5 - 0.3) != (0.3 - 0.1)</code> is TRUE, 2 != 2 is FALSE</td>
 </tr>
 <tr class="odd">
 <td align="left">Equal</td>
 <td align="left">all.equal()</td>
-<td align="left">all.equal(0.5 - 0.3,0.3 - 0.1) is TRUE</td>
+<td align="left"><code>all.equal(0.5 - 0.3,0.3 - 0.1)</code> is TRUE</td>
 </tr>
 </tbody>
 </table>
@@ -183,27 +183,27 @@ img {
 <tbody>
 <tr class="odd">
 <td align="left">True</td>
-<td align="left">TRUE , 1</td>
+<td align="left"><code>TRUE</code> <code>1</code></td>
 </tr>
 <tr class="even">
 <td align="left">False</td>
-<td align="left">FALSE , 0</td>
+<td align="left"><code>FALSE</code> <code>0</code></td>
 </tr>
 <tr class="odd">
 <td align="left">Empty</td>
-<td align="left">NULL</td>
+<td align="left"><code>NULL</code></td>
 </tr>
 <tr class="even">
 <td align="left">Unknown</td>
-<td align="left">NA</td>
+<td align="left"><code>NA</code></td>
 </tr>
 <tr class="odd">
 <td align="left">Not a number e.g. <code>0/0</code></td>
-<td align="left">NaN</td>
+<td align="left"><code>NaN</code></td>
 </tr>
 <tr class="even">
 <td align="left">Infinite e.g. <code>1/0</code></td>
-<td align="left">Inf</td>
+<td align="left"><code>Inf</code></td>
 </tr>
 </tbody>
 </table>
@@ -222,42 +222,42 @@ img {
 <tr class="odd">
 <td align="left">Not</td>
 <td align="left">!</td>
-<td align="left">!TRUE is FALSE</td>
+<td align="left"><code>!TRUE</code> is FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">And</td>
 <td align="left">&amp;</td>
-<td align="left">TRUE &amp; FALSE is FALSE, c(TRUE,TRUE) &amp; c(FALSE,TRUE) is FALSE, TRUE</td>
+<td align="left"><code>TRUE &amp; FALSE</code> is FALSE, <code>c(TRUE,TRUE) &amp; c(FALSE,TRUE)</code> is FALSE, TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Or</td>
 <td align="left"><code>|</code></td>
-<td align="left">TRUE <code>|</code> FALSE is TRUE, c(TRUE,FALSE) <code>|</code> c(FALSE,FALSE) is TRUE, FALSE</td>
+<td align="left"><code>TRUE | FALSE</code> is TRUE, <code>c(TRUE,FALSE) | c(FALSE,FALSE)</code> is TRUE, FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Xor</td>
 <td align="left">xor()</td>
-<td align="left">xor(TRUE,FALSE) is TRUE</td>
+<td align="left"><code>xor(TRUE,FALSE)</code> is TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Bitwise And</td>
 <td align="left">&amp;&amp;</td>
-<td align="left">c(TRUE,TRUE) &amp;&amp; c(FALSE,TRUE) is FALSE</td>
+<td align="left"><code>c(TRUE,TRUE) &amp;&amp; c(FALSE,TRUE)</code> is FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Bitwise Or</td>
 <td align="left"><code>||</code></td>
-<td align="left">c(TRUE,FALSE) <code>||</code> c(FALSE,FALSE) is TRUE</td>
+<td align="left"><code>c(TRUE,FALSE) || c(FALSE,FALSE)</code> is TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">In</td>
 <td align="left">%in%</td>
-<td align="left">“Red” %in% c(“Blue”,“Red”) = TRUE</td>
+<td align="left"><code>&quot;Red&quot; %in% c(&quot;Blue&quot;,&quot;Red&quot;)</code> is TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Not in</td>
 <td align="left">!( x %in% y) or Hmisc::%nin%</td>
-<td align="left">“Red” %nin% c(“Blue”,“Red”) = FALSE</td>
+<td align="left"><code>&quot;Red&quot; %nin% c(&quot;Blue&quot;,&quot;Red&quot;)</code> = FALSE</td>
 </tr>
 </tbody>
 </table>
@@ -276,32 +276,32 @@ img {
 <tr class="odd">
 <td align="left">If</td>
 <td align="left">if(condition) {dosomething}</td>
-<td align="left">if(TRUE) { 2 } returns 2</td>
+<td align="left"><code>if(TRUE) { 2 }</code> is 2</td>
 </tr>
 <tr class="even">
 <td align="left">If else</td>
 <td align="left">if(condition) {do something} else {do something different} or ifelse(condition, do something, do something else)</td>
-<td align="left">if(FALSE) { 2 } else { 3 } returns 3, ifelse(FALSE, 2, 3) returns 3</td>
+<td align="left"><code>if(FALSE) { 2 } else { 3 }</code> is 3 <code>ifelse(FALSE, 2, 3)</code> is 3</td>
 </tr>
 <tr class="odd">
 <td align="left">For loop</td>
 <td align="left">for(i in seq) {dosomething} or foreach::foreach(i=1:3) %do% {something}</td>
-<td align="left">foreach(i=1:3) %do% {TRUE} returns TRUE, TRUE, TRUE</td>
+<td align="left"><code>foreach(i=1:3) %do%  {TRUE}</code> is TRUE, TRUE, TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">While loop</td>
 <td align="left">while(condition) {do something }</td>
-<td align="left">a&lt;-0 ; while(a&lt;3){a&lt;-a+1} ; a returns 3</td>
+<td align="left"><code>a&lt;-0 ; while(a&lt;3){a&lt;-a+1} ; a</code> is 3</td>
 </tr>
 <tr class="odd">
 <td align="left">Switch</td>
 <td align="left">switch(value, …)</td>
-<td align="left">switch(2, “a”, “b”) returns b</td>
+<td align="left"><code>switch(2, &quot;a&quot;, &quot;b&quot;)</code> is b</td>
 </tr>
 <tr class="even">
 <td align="left">Case</td>
 <td align="left">memisc::cases(…)</td>
-<td align="left">cases(“pi&lt;3”=pi&lt;3, “pi=3”=pi==3,“pi&gt;3”=pi&gt;3) returns pi&gt;3</td>
+<td align="left"><code>cases(&quot;pi&lt;3&quot;=pi&lt;3, &quot;pi=3&quot;=pi==3,&quot;pi&gt;3&quot;=pi&gt;3)</code> is pi&gt;3</td>
 </tr>
 </tbody>
 </table>
@@ -322,8 +322,8 @@ img {
 <tbody>
 <tr class="odd">
 <td align="left">Create / update a variable</td>
-<td align="left"><code>&lt;-</code></td>
-<td align="left">a <code>&lt;-</code> 10</td>
+<td align="left">&lt;-</td>
+<td align="left"><code>a &lt;- 10</code></td>
 </tr>
 </tbody>
 </table>
@@ -345,17 +345,17 @@ img {
 <tr class="odd">
 <td align="left">Use public function from package</td>
 <td align="left">::</td>
-<td align="left">memisc::cases()</td>
+<td align="left"><code>memisc::cases()</code></td>
 </tr>
 <tr class="even">
 <td align="left">Use private function from package</td>
 <td align="left">:::</td>
-<td align="left">optiRum:::pounds_format()</td>
+<td align="left"><code>optiRum:::pounds_format()</code></td>
 </tr>
 <tr class="odd">
 <td align="left">Get a component e.g a data.frame column</td>
 <td align="left">$</td>
-<td align="left">iris$Sepal.Length</td>
+<td align="left"><code>iris$Sepal.Length</code></td>
 </tr>
 <tr class="even">
 <td align="left">Extract a property from a class</td>
@@ -365,12 +365,41 @@ img {
 <tr class="odd">
 <td align="left">Refer to positions in a data.frame or vector</td>
 <td align="left">[ ]</td>
-<td align="left">iris[5:10,1]</td>
+<td align="left"><code>iris[5:10,1]</code></td>
 </tr>
 <tr class="even">
 <td align="left">Refer to item in a list</td>
 <td align="left">[[ ]]</td>
-<td align="left">list(iris=iris,mtcars=mtcars)[[“iris”]]</td>
+<td align="left"><code>list(iris=iris,mtcars=mtcars)[[&quot;iris&quot;]]</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="meta-operators" class="section level2">
+<h2>Meta-operators</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Action</th>
+<th align="left">Operator</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Comment</td>
+<td align="left">#</td>
+<td align="left"><code># This is my comment</code></td>
+</tr>
+<tr class="even">
+<td align="left">Help</td>
+<td align="left">?</td>
+<td align="left"><code>?data.table</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Identifier</td>
+<td align="left">`</td>
+<td align="left"><code>irisDT[ , `:=`(CreatedDate = Sys.Date())]</code></td>
 </tr>
 </tbody>
 </table>
