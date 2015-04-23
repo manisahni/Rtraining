@@ -10,7 +10,7 @@
 
 <meta name="author" content="Steph Locke" />
 
-<meta name="date" content="2015-04-22" />
+<meta name="date" content="2015-04-23" />
 
 <title>Package development</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Package development</h1>
 <h4 class="author"><em>Steph Locke</em></h4>
-<h4 class="date"><em>2015-04-22</em></h4>
+<h4 class="date"><em>2015-04-23</em></h4>
 </div>
 
 
@@ -79,6 +79,12 @@ img {
 <h2>What’s a package?</h2>
 <p>A package is a collection of functionality designed to achieve one or more purposes. Commonly it is a bundle of functions that help tackle a certain type of analysis.</p>
 <p>Packages are great ways to modularise your code and create standardised ways of doing specific tasks in your organisation, like charts (<code>optiRum::theme_optimum()</code>).</p>
+</div>
+<div id="the-package-development-bible" class="section level2">
+<h2>The package development Bible</h2>
+<p>There is an <a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">R foundation guide to writing packages</a>. I don’t recommend you start with that! It is however what any package that you submit to the central repository of R packages (CRAN) will be held against - so if you’d like to get a package on CRAN you will need to read this.</p>
+<p>The better, more accessible book <a href="http://r-pkgs.had.co.nz/">R packages</a> is by Hadley Wickham and will cover things in a lot of depth but is more accesable and has exercises.</p>
+<p>For quick learning abotu devtools you can check out <a href="http://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf">the cheatsheet</a></p>
 </div>
 <div id="how-do-you-build-a-package" class="section level2">
 <h2>How do you build a package?</h2>
@@ -117,10 +123,71 @@ init(&quot;.&quot;)</code></pre>
 <p>Once I have this skeleton I fill in the various bits of info about my package in DESCRIPTION, README, R/package.R, and so forth.</p>
 <p>After I’ve done some basic hygiene, I can start building my R functions and associated tests.</p>
 </div>
-<div id="the-book" class="section level2">
-<h2>The book</h2>
-<p>There is an <a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">R foundation guide to writing packages</a>. I don’t recommend you start with that!</p>
-<p>The better, more accessible book <a href="http://r-pkgs.had.co.nz/">R packages</a> is by Hadley Wickham and will cover things in a lot of depth.</p>
+<div id="writing-quality-functions" class="section level2">
+<h2>Writing quality functions</h2>
+<ol style="list-style-type: decimal">
+<li>Plan it out</li>
+<li>Write the documentation first</li>
+<li>Keep testing foremost in your mind - ideally, write unit tests first</li>
+<li>Choose sensible defaults for paramaters</li>
+<li>(Without strong reason) make your function return an object that has to be specifically assigned to the global environment</li>
+<li>Add validation of inputs and error handling</li>
+<li>Avoid loops</li>
+<li>Make dependencies obvious</li>
+<li>Consider how you will be able to test the function</li>
+<li>Use the ellipsis (<code>...</code>) argument to pass values through to optional components in functions</li>
+</ol>
+<pre class="r"><code>#' A function quick description
+#' 
+#' A more detailed description that can span multiple lines
+#' for readability. Covers concepts, typical usages etc.
+#'
+#' @param  param1 Info about param1 e.g. data type, guidance
+#' @param  param2 Info about param1 e.g. data type, guidance
+#' @param  ...    Additional values to pass to x, y, z
+#'
+#' @return returnDT Info about what is returned by the function
+#' 
+#' @keywords words allowing search
+#' @family ifPartOfABundle
+#' 
+#' @examples
+#' # Sample code that illustrates usage
+#'
+#' @export
+
+myFuncName&lt;- function(param1, param2=&quot;Blah&quot;, ...){
+stopifnot(param1&gt;0, is.character(param2))
+
+# Function code routinely commented with WHY or
+# explanations of complex HOW (but consider 
+# breaking these up / simplifying)
+}
+</code></pre>
+</div>
+<div id="verification-process" class="section level2">
+<h2>Verification process</h2>
+<p>Let’s make sure your code is all working (assumes you’ve got unit tests)</p>
+<pre class="r"><code>library(devtools)
+
+# Build help files
+document()
+
+# Run unit tests
+test()
+
+# Check against CRAN standards
+check()</code></pre>
+<p>Each of these steps could identify things to fix. It’s great to get rid of as many ERRORs, WARNINGs, and NOTEs as possible.</p>
+</div>
+<div id="publishing-your-package" class="section level2">
+<h2>Publishing your package</h2>
+<p>There are a number of locations but I’ll cover two:</p>
+<ol style="list-style-type: decimal">
+<li>CRAN: The central repository of packages, this is ensures a minimum level of quality. It does however have some weird rules (like Title Case demands) and one or two of the gate-keepers aren’t very patient with people. It’s great to do, but be prepared for rework and some comments that could make you wince.</li>
+<li>GitHub: GitHub is becoming more and more indexed and well utilised asa location for R packages.</li>
+</ol>
+<p>My personal recommendations are to use GitHub as your active development environment, so that people can download the latest version, and periodically attempt to release to CRAN. This helps push up your package quality and makes your code more widely available.</p>
 </div>
 
 
